@@ -11,7 +11,7 @@
         <h1 v-show="s == 1">{{ ans }}</h1>
       </q-card-section>
       <q-input v-if="mode=='quiz'" v-model="myAns" :label = "$t('enter your answer')"/>
-      <q-btn v-if="mode=='quiz'" color="primary" @click="test()">{{ s == 0 ? $t('test') : $t('next') }}</q-btn>
+      <q-btn :size="'xl'" v-if="mode=='quiz'" color="primary" @click="test()">{{ s == 0 ? $t('test') : $t('next') }}</q-btn>
     </q-card>
   </q-page>
 </template>
