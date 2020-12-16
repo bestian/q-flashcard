@@ -2,8 +2,9 @@
   <q-page class="flex flex-center">
     <q-card id = "main" padding v-touch-swipe.mouse="flip" @click="flip()">
       <q-card-section v-if="mode=='flashcard'">
-        <h3 v-show="s == 0 && op != '÷'">{{ n1 }} {{ op }} {{ n2 }}</h3>
+        <h3 v-show="s == 0 && op != '÷' && op != 'gcd'">{{ n1 }} {{ op }} {{ n2 }}</h3>
         <h3 v-show="s == 0 && op == '÷'">{{ n1 * n2 }} {{ op }} {{ n2 }}</h3>
+        <h3 v-show="s == 0 && op == 'gcd'">gcd({{ n1 }}, {{ n2 }})</h3>
         <h1 v-show="s == 1">{{ ans }}</h1>
       </q-card-section>
       <q-card-section v-if="mode=='quiz'">
@@ -31,6 +32,19 @@ export default {
     }
   },
   methods: {
+    gcd (x, y) {
+      if ((typeof x !== 'number') || (typeof y !== 'number')) {
+        return false
+      }
+      x = Math.abs(x)
+      y = Math.abs(y)
+      while (y) {
+        var t = y
+        y = x % y
+        x = t
+      }
+      return x
+    },
     test () {
       if (this.op === '+') {
         this.ans = this.n1 + this.n2
@@ -43,6 +57,9 @@ export default {
       }
       if (this.op === '÷') {
         this.ans = this.n1
+      }
+      if (this.op === 'gcd') {
+        this.ans = this.gcd(this.n1, this.n2)
       }
       if (this.s === 0) {
         console.log(this.ans)
@@ -76,6 +93,9 @@ export default {
         }
         if (this.op === '÷') {
           this.ans = this.n1
+        }
+        if (this.op === 'gcd') {
+          this.ans = this.gcd(this.n1, this.n2)
         }
       } else {
         this.s = 0
