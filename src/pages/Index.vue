@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <q-card id = "main" padding @click = "flip()">
+    <q-card id = "main" padding v-touch-swipe.mouse="flip" @click="flip()">
       <q-card-section v-if="mode=='flashcard'">
         <h3 v-show="s == 0">{{ n1 }} {{ op }} {{ n2 }}</h3>
         <h1 v-show="s == 1">{{ ans }}</h1>
