@@ -91,7 +91,7 @@ export default {
         { label: 'US English', value: 'en-us' }
       ],
       op: '+',
-      ops: ['+', '-', '×'],
+      ops: ['+', '-', '×', '÷'],
       mode: 'flashcard',
       modes: [
         { label: '閃卡', value: 'flashcard' },

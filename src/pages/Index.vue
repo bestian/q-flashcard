@@ -2,7 +2,8 @@
   <q-page class="flex flex-center">
     <q-card id = "main" padding v-touch-swipe.mouse="flip" @click="flip()">
       <q-card-section v-if="mode=='flashcard'">
-        <h3 v-show="s == 0">{{ n1 }} {{ op }} {{ n2 }}</h3>
+        <h3 v-show="s == 0 && op != '÷'">{{ n1 }} {{ op }} {{ n2 }}</h3>
+        <h3 v-show="s == 0 && op == '÷'">{{ n1 * n2 }} {{ op }} {{ n2 }}</h3>
         <h1 v-show="s == 1">{{ ans }}</h1>
       </q-card-section>
       <q-card-section v-if="mode=='quiz'">
@@ -40,6 +41,9 @@ export default {
       if (this.op === '×') {
         this.ans = this.n1 * this.n2
       }
+      if (this.op === '÷') {
+        this.ans = this.n1
+      }
       if (this.s === 0) {
         console.log(this.ans)
         console.log(parseInt(this.myAns))
@@ -69,6 +73,9 @@ export default {
         }
         if (this.op === '×') {
           this.ans = this.n1 * this.n2
+        }
+        if (this.op === '÷') {
+          this.ans = this.n1
         }
       } else {
         this.s = 0
