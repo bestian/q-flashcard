@@ -12,10 +12,8 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          {{ $t(mode) }}
         </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -26,82 +24,92 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item>
+          <q-select
+            class="wide"
+            v-model="$i18n.locale"
+            :options="langs"
+            :label="$t('lang')"
+            emit-value
+          />
+        </q-item>
+        <q-item>
+          <q-select
+            class="wide"
+            v-model="mode"
+            :options="modes"
+            :label="$t('mode')"
+            emit-value
+          />
+        </q-item>
+        <q-item>
+          <q-select
+            class="wide"
+            v-model="op"
+            :options="ops"
+            :label="$t('method')"
+            emit-value
+          />
+        </q-item>
+        <q-item>
+          <q-select
+            class="wide"
+            v-model="max1"
+            :options="maxs"
+            :label="$t('max1')"
+            emit-value
+          />
+        </q-item>
+        <q-item>
+          <q-select
+            class="wide"
+            v-model="max2"
+            :options="maxs"
+            :label="$t('max2')"
+            emit-value
+          />
+        </q-item>
       </q-list>
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view :op="op" :mode="mode" :max1="max1" :max2="max2"/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
+  components: { },
   data () {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
+      langs: [
+        { label: '繁體中文', value: 'zh-TW' },
+        { label: 'US English', value: 'en-us' }
+      ],
+      op: '+',
+      ops: ['+', '-', '×'],
+      mode: 'flashcard',
+      modes: [
+        { label: '閃卡', value: 'flashcard' },
+        { label: '挑戰', value: 'quiz' }
+      ],
+      max1: 20,
+      max2: 10,
+      maxs: [5, 10, 20, 50, 100, 500, 1000]
     }
+  },
+  mounted () {
+    this.$i18n.locale = 'zh-TW'
   }
 }
 </script>
+
+<style type="text/css" scoped="">
+  .wide {
+    min-width: 100px;
+  }
+</style>
