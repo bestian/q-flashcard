@@ -7,11 +7,11 @@
         <h1 v-show="s == 1">{{ ans }}</h1>
       </q-card-section>
       <q-card-section v-if="mode=='quiz'">
-        <h3 v-show="s == 0">{{ n1 }} {{ op }} {{ n2 }}
+        <h3 v-show="s == 0">{{ n1 * n2 }} {{ op }} {{ n2 }}
         </h3>
         <h1 v-show="s == 1">{{ ans }}</h1>
       </q-card-section>
-      <q-input :autofocus="true" v-if="mode=='quiz'" v-model="myAns" :label = "$t('enter your answer')"/>
+      <q-input :autofocus="true" v-if="mode=='quiz'" v-show="s == 0" v-model="myAns" :label = "$t('enter your answer')"/>
       <q-btn :size="'xl'" v-if="mode=='quiz'" color="primary" @click="test()">{{ s == 0 ? $t('test') : $t('next') }}</q-btn>
     </q-card>
   </q-page>
@@ -55,8 +55,8 @@ export default {
         }
       } else {
         this.s = 0
-        this.n1 = Math.floor(Math.random() * this.max1)
-        this.n2 = Math.floor(Math.random() * this.max2)
+        this.n1 = Math.floor(Math.random() * this.max1 + 1)
+        this.n2 = Math.floor(Math.random() * this.max2 + 1)
       }
     },
     flip () {
@@ -79,8 +79,8 @@ export default {
         }
       } else {
         this.s = 0
-        this.n1 = Math.floor(Math.random() * this.max1)
-        this.n2 = Math.floor(Math.random() * this.max2)
+        this.n1 = Math.floor(Math.random() * this.max1 + 1)
+        this.n2 = Math.floor(Math.random() * this.max2 + 1)
       }
     }
   }
