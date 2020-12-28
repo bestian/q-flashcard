@@ -2,10 +2,13 @@
   <q-page class="flex flex-center">
     <q-card id = "main" padding v-touch-swipe.mouse="flip" @click="flip()">
       <q-card-section v-if="mode=='flashcard'">
-        <h3 v-show="s == 0 && op != '÷' && op != 'gcd'">{{ n1 }} {{ op }} {{ n2 }}</h3>
-        <h3 v-show="s == 0 && op == '÷'">{{ n1 * n2 }} {{ op }} {{ n2 }}</h3>
-        <h3 v-show="s == 0 && op == 'gcd'">gcd({{ n1 }}, {{ n2 }})</h3>
-        <h1 v-show="s == 1">{{ ans }}</h1>
+        <transition-group appear enter-active-class="animated flipInY"
+    leave-active-class="animated flipOutY" :duration="500">
+          <h3 :key = "1" v-show="s == 0 && op != '÷' && op != 'gcd'">{{ n1 }} {{ op }} {{ n2 }}</h3>
+          <h3 :key = "2" v-show="s == 0 && op == '÷'">{{ n1 * n2 }} {{ op }} {{ n2 }}</h3>
+          <h3 :key = "3" v-show="s == 0 && op == 'gcd'">gcd({{ n1 }}, {{ n2 }})</h3>
+          <h1 :key = "4" v-show="s == 1">{{ ans }}</h1>
+        </transition-group>
       </q-card-section>
       <q-card-section v-if="mode=='quiz'">
         <h3 v-show="s == 0">{{ n1 * n2 }} {{ op }} {{ n2 }}
