@@ -14,6 +14,8 @@
         <q-toolbar-title>
           {{ $t(mode) }}
         </q-toolbar-title>
+
+        <a href="https://github.com/bestian/q-flashcard" target="_blank"><q-icon name = "ion-logo-github" title="源碼" /></a>
       </q-toolbar>
     </q-header>
 
@@ -111,5 +113,10 @@ export default {
 <style type="text/css" scoped="">
   .wide {
     min-width: 100px;
+  }
+
+  a {
+    font-size: 24px;
+    text-decoration: none;
   }
 </style>
