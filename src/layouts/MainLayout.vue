@@ -27,6 +27,7 @@
     >
       <q-list>
         <q-item>
+          <q-icon name="ion-globe"/>
           <q-select
             class="wide"
             v-model="$i18n.locale"
@@ -36,6 +37,7 @@
           />
         </q-item>
         <q-item>
+          <q-icon name="ion-planet"/>
           <q-select
             class="wide"
             v-model="mode"
@@ -45,6 +47,7 @@
           />
         </q-item>
         <q-item>
+          <q-icon name="ion-american-football"/>
           <q-select
             class="wide"
             v-model="op"
@@ -54,6 +57,7 @@
           />
         </q-item>
         <q-item>
+          <q-icon name="ion-arrow-up"/>
           <q-select
             class="wide"
             v-model="max1"
@@ -63,6 +67,7 @@
           />
         </q-item>
         <q-item>
+          <q-icon name="ion-arrow-up"/>
           <q-select
             class="wide"
             v-model="max2"
@@ -90,6 +95,7 @@ export default {
       leftDrawerOpen: false,
       langs: [
         { label: '繁體中文', value: 'zh-TW' },
+        { label: '簡体中文', value: 'zh-CN' },
         { label: 'US English', value: 'en-us' }
       ],
       op: '+',
@@ -105,7 +111,10 @@ export default {
     }
   },
   mounted () {
-    this.$i18n.locale = 'zh-TW'
+    this.$i18n.locale = navigator.language || 'zh-TW'
+    if (navigator.language === 'zh-cn' || navigator.language === 'zh-CN' || navigator.userLanguage === 'zh-cn') {
+      this.$i18n.locale = 'zh-CN'
+    }
   }
 }
 </script>
