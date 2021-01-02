@@ -15,7 +15,7 @@
           {{ $t(mode) }}
         </q-toolbar-title>
 
-        <a href="https://github.com/bestian/q-flashcard" target="_blank"><q-icon name = "ion-logo-github" title="源碼" /></a>
+        <a href="https://github.com/bestian/q-flashcard" target="_blank"><q-icon name = "ion-logo-github" title="源碼" />源碼</a>
       </q-toolbar>
     </q-header>
 
