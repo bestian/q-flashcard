@@ -116,8 +116,8 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'flashcard',
-        short_name: 'flashcard',
+        name: '自由數學閃卡',
+        short_name: '閃卡',
         description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',

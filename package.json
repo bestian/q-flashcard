@@ -1,6 +1,6 @@
 {
-  "name": "q-flashcard",
-  "version": "0.0.1",
+  "name": "自由數學閃卡",
+  "version": "3.0.2",
   "description": "A Quasar Framework app",
   "productName": "flashcard",
   "author": "Bestian Tang 小巴 <bestian@gmail.com>",
