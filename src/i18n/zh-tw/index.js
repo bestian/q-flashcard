@@ -31,5 +31,6 @@ export default {
   'download perfect png fail': '無法產生圖片，請再試一次',
   'choose your answer': '選擇正確答案',
   'mc.correct': '答對了！',
-  'mc.wrong': '答錯了，正確答案是 {ans}'
+  'mc.wrong': '答錯了，正確答案是 {ans}',
+  resetOnWrong: '答錯歸零'
 }

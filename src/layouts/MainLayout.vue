@@ -84,6 +84,17 @@
 
         <q-separator spaced />
 
+        <q-item tag="label" class="q-py-sm" clickable>
+          <q-item-section avatar>
+            <q-checkbox v-model="resetOnWrong" color="primary" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ $t('resetOnWrong') }}</q-item-label>
+          </q-item-section>
+        </q-item>
+
+        <q-separator spaced />
+
         <q-item class="q-py-sm">
           <q-item-section avatar>
             <q-icon name="calculate" />
@@ -134,7 +145,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view :op="op" :mode="mode" :max1="max1" :max2="max2"/>
+      <router-view :op="op" :mode="mode" :max1="max1" :max2="max2" :resetOnWrong="resetOnWrong"/>
     </q-page-container>
   </q-layout>
 </template>
@@ -162,7 +173,8 @@ export default {
       ],
       max1: 20,
       max2: 10,
-      maxs: [5, 10, 20, 50, 100, 500, 1000]
+      maxs: [5, 10, 20, 50, 100, 500, 1000],
+      resetOnWrong: false
     }
   },
   mounted () {

@@ -31,5 +31,6 @@ export default {
   'download perfect png fail': 'Could not create image. Please try again.',
   'choose your answer': 'Choose the correct answer',
   'mc.correct': 'Correct!',
-  'mc.wrong': 'Wrong! The answer is {ans}'
+  'mc.wrong': 'Wrong! The answer is {ans}',
+  resetOnWrong: 'Reset streak on wrong answer'
 }

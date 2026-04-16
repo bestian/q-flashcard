@@ -171,7 +171,7 @@ import html2canvas from 'html2canvas'
 
 export default {
   name: 'PageIndex',
-  props: ['op', 'max1', 'max2', 'mode'],
+  props: ['op', 'max1', 'max2', 'mode', 'resetOnWrong'],
   data () {
     return {
       n1: 3,
@@ -360,8 +360,10 @@ export default {
           })
         }
       } else {
-        this.winStreak = 0
-        this.streakStartTime = null
+        if (this.resetOnWrong) {
+          this.winStreak = 0
+          this.streakStartTime = null
+        }
         if (this.$q && this.$q.notify) {
           this.$q.notify({
             type: 'negative',
@@ -421,7 +423,10 @@ export default {
             })
           }
         } else {
-          this.winStreak = 0
+          if (this.resetOnWrong) {
+            this.winStreak = 0
+            this.streakStartTime = null
+          }
           this.myAns = null
           this.$q.notify({
             type: 'negative',
