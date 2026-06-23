@@ -51,6 +51,7 @@
           <div class="streak-progress-label">
             <q-icon name="local_fire_department" size="16px" color="orange" />
             {{ winStreak }} / 10
+            <q-icon class="q-ml-sm" :name="timerRunning ? 'hourglass_top' : 'hourglass_disabled'" :color="timerRunning ? 'orange' : 'grey-5'" size="16px" />
           </div>
         </div>
 
@@ -108,6 +109,7 @@
           <div class="streak-progress-label mc-streak-label">
             <q-icon name="local_fire_department" size="16px" color="red" />
             {{ winStreak }} / 10
+            <q-icon class="q-ml-sm" :name="timerRunning ? 'hourglass_top' : 'hourglass_disabled'" :color="timerRunning ? 'deep-purple' : 'grey-5'" size="16px" />
           </div>
         </div>
 
@@ -188,7 +190,8 @@ export default {
       // 選擇題相關
       mcChoices: [],
       mcSelected: null,
-      mcAnswered: false
+      mcAnswered: false,
+      timerRunning: false
     }
   },
   mounted () {
@@ -207,6 +210,7 @@ export default {
   },
   watch: {
     mode (newMode) {
+      this.timerRunning = false
       if (newMode === 'multiple-choice') {
         this.winStreak = 0
         this.streakStartTime = null
@@ -214,6 +218,15 @@ export default {
         this.n2 = Math.floor(Math.random() * this.max2 + 1)
         this.initMc()
       }
+    },
+    op (newVal, oldVal) {
+      if (newVal !== oldVal) this.restartChallenge()
+    },
+    max1 (newVal, oldVal) {
+      if (newVal !== oldVal) this.restartChallenge()
+    },
+    max2 (newVal, oldVal) {
+      if (newVal !== oldVal) this.restartChallenge()
     }
   },
   methods: {
@@ -339,7 +352,10 @@ export default {
       this.mcSelected = choice
       this.mcAnswered = true
       if (choice === this.ans) {
-        if (this.winStreak === 0) this.streakStartTime = Date.now()
+        if (this.winStreak === 0) {
+          this.streakStartTime = Date.now()
+          this.timerRunning = true
+        }
         this.winStreak += 1
         if (this.winStreak >= 10) {
           var elapsed = parseFloat(((Date.now() - this.streakStartTime) / 1000).toFixed(1))
@@ -350,6 +366,7 @@ export default {
           }
           this.showPerfect = true
           this.winStreak = 0
+          this.timerRunning = false
         } else if (this.$q && this.$q.notify) {
           this.$q.notify({
             type: 'positive',
@@ -363,6 +380,7 @@ export default {
         if (this.resetOnWrong) {
           this.winStreak = 0
           this.streakStartTime = null
+          this.timerRunning = false
         }
         if (this.$q && this.$q.notify) {
           this.$q.notify({
@@ -378,6 +396,21 @@ export default {
       this.n1 = Math.floor(Math.random() * this.max1 + 1)
       this.n2 = Math.floor(Math.random() * this.max2 + 1)
       this.initMc()
+    },
+    restartChallenge () {
+      if (this.mode !== 'quiz' && this.mode !== 'multiple-choice') return
+      this.winStreak = 0
+      this.streakStartTime = null
+      this.timerRunning = false
+      this.n1 = Math.floor(Math.random() * this.max1 + 1)
+      this.n2 = Math.floor(Math.random() * this.max2 + 1)
+      if (this.mode === 'multiple-choice') {
+        this.initMc()
+      } else {
+        this.s = 0
+        this.myAns = null
+        this.$nextTick(() => { this.$refs.answerInput && this.$refs.answerInput.focus() })
+      }
     },
     test () {
       if (this.op === '+') {
@@ -402,7 +435,10 @@ export default {
         if (parseInt(this.myAns) === this.ans) {
           this.s = 1
           this.myAns = null
-          if (this.winStreak === 0) this.streakStartTime = Date.now()
+          if (this.winStreak === 0) {
+            this.streakStartTime = Date.now()
+            this.timerRunning = true
+          }
           this.winStreak += 1
           if (this.winStreak >= 10) {
             var elapsed = parseFloat(((Date.now() - this.streakStartTime) / 1000).toFixed(1))
@@ -413,6 +449,7 @@ export default {
             }
             this.showPerfect = true
             this.winStreak = 0
+            this.timerRunning = false
           } else if (this.$q && this.$q.notify) {
             this.$q.notify({
               type: 'positive',
@@ -426,6 +463,7 @@ export default {
           if (this.resetOnWrong) {
             this.winStreak = 0
             this.streakStartTime = null
+            this.timerRunning = false
           }
           this.myAns = null
           this.$q.notify({
