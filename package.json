@@ -1,9 +1,9 @@
 {
-  "name": "自由數學閃卡",
+  "name": "Flashcard",
   "version": "3.0.2",
   "description": "A Quasar Framework app",
   "productName": "flashcard",
-  "author": "Bestian Tang 小巴 <bestian@gmail.com>",
+  "author": "Bestian Tang <bestian@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS=--openssl-legacy-provider quasar dev",
